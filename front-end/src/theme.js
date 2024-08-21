@@ -13,6 +13,13 @@ const theme = {
   },
   fontsSizes: {
     body: '16px',
+  },
+  fonts: {
+    main: 'Open Sans, sans-serif',
+  },
+  fontWeights: {
+    normal: 400,
+    bold: 600,
   }
 };
 

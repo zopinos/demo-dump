@@ -17,8 +17,8 @@ const Div = styled.div`
 `;
 
 const H1 = styled.h1`
-  font-family: 'Open Sans', sans-serif;
-  font-weight: 600;
+  font-family: ${props => props.theme.fonts.main};
+  font-weight: ${props => props.theme.fontWeights.bold};
   font-style: normal;
 `;
 
@@ -33,8 +33,8 @@ const DemoLink = styled(Link)`
   color: ${props => props.theme.colors.white};
   border-radius: 10px;
   text-decoration: none;
-  font-family: 'Open Sans', sans-serif;
-  font-weight: 600;
+  font-family: ${props => props.theme.fonts.main};
+  font-weight: ${props => props.theme.fontWeights.bold};
   font-style: normal;
 
   &:hover {
@@ -52,6 +52,7 @@ const Sidebar = () => {
         <Nav>
           <DemoLink to='/'>home</DemoLink>
           <DemoLink to='/1'>first thing</DemoLink>
+          <DemoLink to='/word-vortex'>word vortex</DemoLink>
         </Nav>
       </Div>
     </ThemeProvider>

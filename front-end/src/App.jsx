@@ -4,6 +4,7 @@ import First from './components/Routes/First';
 import Sidebar from './components/Sidebar';
 import styled, { ThemeProvider, createGlobalStyle } from 'styled-components';
 import theme from './theme';
+import WordVordex from './components/Routes/WordVortex';
 
 const GlobalStyle = createGlobalStyle`
   body {
@@ -32,6 +33,15 @@ const Content = styled.div`
   flex-direction: column;
   flex: 1;
   overflow-y: auto;
+  overflow-x: hidden;
+`;
+
+const Footer = styled.footer`
+  font-family: ${props => props.theme.fonts.main};
+  font-weight: ${props => props.theme.fontWeights.normal};
+  font-style: normal;
+  text-align: center;
+  margin: 10px 0;
 `;
 
 const App = () => {
@@ -40,21 +50,25 @@ const App = () => {
     <Router>
       <ThemeProvider theme={theme}>
         <GlobalStyle />
+      
+        <Page>
+          <Views>
+            <Sidebar />
+            <Content>
+
+              <Routes>
+                <Route path='/' element={<Home />} />
+                <Route path='/1' element={<First />} />
+                <Route path='/word-vortex' element={<WordVordex />} />
+              </Routes>
+
+              <Footer>
+                This is some text.
+              </Footer>
+            </Content>
+          </Views>
+        </Page>
       </ThemeProvider>
-      <Page>
-        <Views>
-          <Sidebar />
-          <Content>
-            <Routes>
-              <Route path='/' element={<Home />} />
-              <Route path='/1' element={<First />} />
-            </Routes>
-            <p>
-              This is some text.
-            </p>
-          </Content>
-        </Views>
-      </Page>
     </Router>
   );
 };
