@@ -1,9 +1,9 @@
-import js from '@eslint/js'
-import globals from 'globals'
-import react from 'eslint-plugin-react'
-import reactHooks from 'eslint-plugin-react-hooks'
-import reactRefresh from 'eslint-plugin-react-refresh'
-import stylisticJs from '@stylistic/eslint-plugin-js'
+import js from '@eslint/js';
+import globals from 'globals';
+import react from 'eslint-plugin-react';
+import reactHooks from 'eslint-plugin-react-hooks';
+import reactRefresh from 'eslint-plugin-react-refresh';
+import stylisticJs from '@stylistic/eslint-plugin-js';
 
 export default [
   { ignores: ['dist'] },
@@ -44,7 +44,7 @@ export default [
         'error',
         'always'
       ],
-      '@stylistic/js/jsx-quotes': ["error", "prefer-single"],
+      '@stylistic/js/jsx-quotes': ['error', 'prefer-single'],
     },
   },
-]
+];
