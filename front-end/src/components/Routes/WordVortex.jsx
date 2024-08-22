@@ -19,7 +19,22 @@ const circle = (radius) => keyframes`
   }
 `;
 
+/*
+--- How to scale from one range to another: ---
+S: input
+Smin: min input
+Smax: max input
+G: output
+Gmin: min output
+Gmax: max output
+
+Formula:
+G = ((S - Smin) * (Gmax - Gmin)) / (Smax - Smin) + Gmin
+*/
+
 const Text = styled.p`
+  font-size: ${props => ((props.radius - 50) * (60 - 10) / (400 - 50)) + 10}px;
+  text-shadow: black 0 0 5px;
   position: absolute;
   animation: ${props => circle(props.radius)} ${props => props.duration}s linear infinite;
 `;
@@ -28,18 +43,19 @@ const getRandomArbitrary = (min, max) => {
   return Math.random() * (max - min) + min;
 };
 
-
-const getRandomizedArray = (length, minDistance, maxDistance, minDuration, maxDuration) =>
+const getRandomizedVortexNumbers = (length, minDistance, maxDistance, minDuration, maxDuration) =>
   Array.from({length: length}, () => [
     getRandomArbitrary(minDistance, maxDistance),
     getRandomArbitrary(minDuration, maxDuration)
   ]);
 
+const vortexNumbers = getRandomizedVortexNumbers(200, 50, 400, 1, 2);
+
 const WordVordex = () => {
   return (
     <ThemeProvider theme={theme}>
       <Div>
-        {getRandomizedArray(200, 50, 400, 0.5, 2).map((element, index) => {
+        {vortexNumbers.map((element, index) => {
           return (<Text key={index} radius={element[0]} duration={element[1]}>haloo</Text>);
         })}
       </Div>
