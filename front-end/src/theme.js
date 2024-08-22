@@ -11,8 +11,9 @@ const theme = {
     accentDark:   '#1D3C55',
     dark:         '#092033',
   },
-  fontsSizes: {
+  fontSizes: {
     body: '16px',
+    heading: '36px',
   },
   fonts: {
     main: 'Open Sans, sans-serif',

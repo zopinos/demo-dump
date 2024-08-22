@@ -1,6 +1,7 @@
 import { Link } from 'react-router-dom';
 import styled, { ThemeProvider } from 'styled-components';
 import theme from '../theme';
+import { H1, Nav } from './StyledElements';
 
 const Div = styled.div`
   display: flex;
@@ -14,17 +15,6 @@ const Div = styled.div`
   border-color: ${props => props.theme.colors.accentLight};
   border-right-style: solid;
   border-width: 2px;
-`;
-
-const H1 = styled.h1`
-  font-family: ${props => props.theme.fonts.main};
-  font-weight: ${props => props.theme.fontWeights.bold};
-  font-style: normal;
-`;
-
-const Nav = styled.nav`
-  display: flex;
-  flex-direction: column;
 `;
 
 const DemoLink = styled(Link)`
@@ -51,7 +41,6 @@ const Sidebar = () => {
         <H1>Demos</H1>
         <Nav>
           <DemoLink to='/'>home</DemoLink>
-          <DemoLink to='/1'>first thing</DemoLink>
           <DemoLink to='/word-vortex'>word vortex</DemoLink>
         </Nav>
       </Div>

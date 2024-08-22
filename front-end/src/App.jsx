@@ -1,6 +1,5 @@
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Home from './components/Routes/Home';
-import First from './components/Routes/First';
 import Sidebar from './components/Sidebar';
 import styled, { ThemeProvider, createGlobalStyle } from 'styled-components';
 import theme from './theme';
@@ -58,7 +57,6 @@ const App = () => {
 
               <Routes>
                 <Route path='/' element={<Home />} />
-                <Route path='/1' element={<First />} />
                 <Route path='/word-vortex' element={<WordVordex />} />
               </Routes>
 

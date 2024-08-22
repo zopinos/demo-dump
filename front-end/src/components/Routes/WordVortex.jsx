@@ -34,7 +34,6 @@ G = ((S - Smin) * (Gmax - Gmin)) / (Smax - Smin) + Gmin
 
 const Text = styled.p`
   font-size: ${props => ((props.radius - 50) * (60 - 10) / (400 - 50)) + 10}px;
-  text-shadow: black 0 0 5px;
   position: absolute;
   animation: ${props => circle(props.radius)} ${props => props.duration}s linear infinite;
 `;
@@ -49,7 +48,7 @@ const getRandomizedVortexNumbers = (length, minDistance, maxDistance, minDuratio
     getRandomArbitrary(minDuration, maxDuration)
   ]);
 
-const vortexNumbers = getRandomizedVortexNumbers(200, 50, 400, 1, 2);
+const vortexNumbers = getRandomizedVortexNumbers(100, 50, 400, 2, 3);
 
 const WordVordex = () => {
   return (
