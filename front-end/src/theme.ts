@@ -7,8 +7,9 @@ const theme: DefaultTheme = {
       black: "black",
       white: "white"
     },
-    primary: "black",
-    secondary: "white"
+    primary: "rgb(22, 22, 22)",
+    secondary: "white",
+    dark: "rgb(12, 12, 12)"
   },
   typography: {
     fontSizes: {
@@ -32,6 +33,7 @@ main        #C9E7FF
 secondary   #416380
 accent      #1D3C55
 dark        #092033
+dark        rgb(22, 22, 22)
 */
 
 export default theme;
