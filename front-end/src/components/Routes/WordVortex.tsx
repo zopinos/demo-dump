@@ -10,7 +10,7 @@ const Div = styled.div`
   background-color: ${(props) => props.theme.palette.secondary};
 `;
 
-const circle = (radius: string) => keyframes`
+const circle = (radius: number) => keyframes`
   from{
     transform: rotate(${radius}deg) translate(-${radius}px) rotate(-90deg);
   }
@@ -40,7 +40,7 @@ interface TextProps {
 const Text = styled.p<TextProps>`
   font-size: ${(props) => ((props.radius - 50) * (60 - 10)) / (400 - 50) + 10}px;
   position: absolute;
-  animation: ${(props) => circle(String(props.radius))} ${(props) => props.duration}s linear infinite;
+  animation: ${(props) => circle(props.radius)} ${(props) => props.duration}s linear infinite;
 `;
 
 const getRandomArbitrary = (min: number, max: number) => {
