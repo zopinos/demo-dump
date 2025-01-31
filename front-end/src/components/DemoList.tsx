@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 import styled from "styled-components";
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
 const Base = styled.div`
   display: flex;
@@ -20,7 +20,9 @@ const Overlay = styled.div`
 `;
 
 const Subwindow = styled.div`
-  background: ${({ theme }) => theme.palette.primary};
+  position: fixed;
+  top: 90px;
+  background: ${({ theme }) => theme.palette.dark};
   padding: 20px;
   border-radius: 10px;
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
@@ -37,30 +39,80 @@ const DemoLink = styled(Link)`
   &:hover {
     text-decoration: underline;
   }
+  font-family: ${({ theme }) => theme.typography.fonts.main};
 `;
 
-const ToggleButton = styled.button`
+const Trigger = styled.div`
   position: fixed;
-  top: 20px;
+  top: 0;
+  height: 90px;
+  width: 150px;
+`;
+
+const Button = styled.button<{ show: boolean }>`
+  position: fixed;
+  top: -40px;
   padding: 10px 15px;
   background: ${({ theme }) => theme.palette.dark};
   color: white;
   border: none;
   border-radius: 5px;
   cursor: pointer;
+  transform: ${({ show }) => (show ? "translateY(70px)" : "translateY(0)")};
+  transition: transform 400ms;
 `;
 
 const DemoList = () => {
-  const [isOpen, setIsOpen] = useState(false);
+  const windowRef = useRef<HTMLDivElement | null>(null);
+  const buttonRef = useRef<HTMLButtonElement | null>(null);
+
+  const [isOpen, setIsOpen] = useState<boolean>(false);
+  const [showButton, setShowButton] = useState<boolean>(false);
+
+  const handleOnClick = (event: MouseEvent) => {
+    if (
+      windowRef.current &&
+      buttonRef.current &&
+      !event.composedPath().includes(windowRef.current) &&
+      !event.composedPath().includes(buttonRef.current)
+    ) {
+      setIsOpen(false);
+      setShowButton(false);
+    }
+  };
+
+  const handleOnKeyDown = (event: KeyboardEvent) => {
+    if (event.key === "Escape" || event.code === "Escape") {
+      setIsOpen(false);
+      setShowButton(false);
+    }
+  };
+
+  useEffect(() => {
+    if (isOpen) {
+      document.body.addEventListener("click", handleOnClick);
+      document.body.addEventListener("keydown", handleOnKeyDown);
+      return () => {
+        document.body.removeEventListener("click", handleOnClick);
+        document.body.removeEventListener("keydown", handleOnKeyDown);
+      };
+    }
+  }, [isOpen]);
 
   return (
     <Base>
-      {!isOpen ? (
-        <ToggleButton onClick={() => setIsOpen(!isOpen)}>Open Menu</ToggleButton>
-      ) : (
+      <Trigger onMouseEnter={() => setShowButton(true)} onMouseLeave={() => setShowButton(false)} />
+      <Button
+        ref={buttonRef}
+        onClick={() => setIsOpen(!isOpen)}
+        show={showButton}
+        onMouseEnter={() => setShowButton(true)}
+      >
+        Open Menu
+      </Button>
+      {isOpen && (
         <Overlay>
-          <ToggleButton onClick={() => setIsOpen(!isOpen)}>Open Menu</ToggleButton>
-          <Subwindow>
+          <Subwindow ref={windowRef}>
             <DemoLink to="/">Home</DemoLink>
             <DemoLink to="/word-vortex">Word Vortex</DemoLink>
             <DemoLink to="/game">Game</DemoLink>
