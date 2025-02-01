@@ -2,7 +2,7 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Home from "./components/Routes/Home";
 import { ThemeProvider, createGlobalStyle } from "styled-components";
 import theme from "./theme";
-import WordVordex from "./components/Routes/WordVortex";
+import WordVortex from "./components/Routes/WordVortex";
 import DemoList from "./components/DemoList";
 
 const GlobalStyle = createGlobalStyle`
@@ -27,7 +27,7 @@ const App = () => {
         <GlobalStyle />
         <Routes>
           <Route path="/" element={<Home />} />
-          <Route path="/word-vortex" element={<WordVordex />} />
+          <Route path="/word-vortex" element={<WordVortex />} />
         </Routes>
         <DemoList />
       </ThemeProvider>

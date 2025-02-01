@@ -1,5 +1,6 @@
 import styled, { keyframes, ThemeProvider } from "styled-components";
 import theme from "../../theme";
+import { words } from "../../constants";
 
 const Div = styled.div`
   display: flex;
@@ -54,21 +55,22 @@ const getRandomizedVortexNumbers = (
   minDuration: number,
   maxDuration: number
 ) =>
-  Array.from({ length: length }, () => [
+  Array.from({ length }, () => [
     getRandomArbitrary(minDistance, maxDistance),
-    getRandomArbitrary(minDuration, maxDuration)
+    getRandomArbitrary(minDuration, maxDuration),
+    Math.floor(Math.random() * words.length)
   ]);
 
-const vortexNumbers = getRandomizedVortexNumbers(100, 50, 400, 2, 3);
+const vortexNumbers = getRandomizedVortexNumbers(150, 50, 400, 2, 3);
 
-const WordVordex = () => {
+const WordVortex = () => {
   return (
     <ThemeProvider theme={theme}>
       <Div>
         {vortexNumbers.map((element, index) => {
           return (
             <Text key={index} $radius={element[0]} $duration={element[1]}>
-              haloo
+              {words[element[2]]}
             </Text>
           );
         })}
@@ -77,4 +79,4 @@ const WordVordex = () => {
   );
 };
 
-export default WordVordex;
+export default WordVortex;
