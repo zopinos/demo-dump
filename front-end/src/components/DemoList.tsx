@@ -19,16 +19,21 @@ const Overlay = styled.div`
   //background: rgba(0, 0, 0, 0.5);
 `;
 
-const Subwindow = styled.div`
+const Subwindow = styled.div<{ $height: string }>`
   position: fixed;
-  top: 90px;
-  background: ${({ theme }) => theme.palette.dark};
-  padding: 20px;
-  border-radius: 10px;
+  top: 80px;
+  background: ${({ theme }) => theme.palette.menu};
+  border-radius: ${({ theme }) => theme.borderRadius};
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
-  width: 300px;
-  max-height: 400px;
+  width: 350px;
   overflow-y: auto;
+  padding: 0px;
+  height: ${({ $height }) => $height};
+  transition: height 200ms ease-out;
+`;
+
+const Container = styled.div`
+  padding: 30px;
 `;
 
 const DemoLink = styled(Link)`
@@ -49,17 +54,22 @@ const Trigger = styled.div`
   width: 150px;
 `;
 
-const Button = styled.button<{ show: boolean }>`
+const Button = styled.button<{ $show: boolean }>`
+  display: flex;
+  align-items: center;
+  justify-content: center;
   position: fixed;
-  top: -40px;
-  padding: 10px 15px;
-  background: ${({ theme }) => theme.palette.dark};
+  top: -60px;
+  padding: 0;
+  width: 60px;
+  height: 60px;
+  background: ${({ theme }) => theme.palette.menu};
   color: white;
   border: none;
-  border-radius: 5px;
+  border-radius: 100%;
   cursor: pointer;
-  transform: ${({ show }) => (show ? "translateY(70px)" : "translateY(0)")};
-  transition: transform 400ms;
+  transform: ${({ $show }) => ($show ? "translateY(70px)" : "translateY(0)")};
+  transition: transform 300ms;
 `;
 
 const DemoList = () => {
@@ -68,6 +78,13 @@ const DemoList = () => {
 
   const [isOpen, setIsOpen] = useState<boolean>(false);
   const [showButton, setShowButton] = useState<boolean>(false);
+  const [height, setHeight] = useState("0px");
+
+  const closeWindow = () => {
+    setHeight("0px");
+    setTimeout(() => setIsOpen(false), 300);
+    setTimeout(() => setShowButton(false), 300);
+  };
 
   const handleOnClick = (event: MouseEvent) => {
     if (
@@ -76,26 +93,27 @@ const DemoList = () => {
       !event.composedPath().includes(windowRef.current) &&
       !event.composedPath().includes(buttonRef.current)
     ) {
-      setIsOpen(false);
-      setShowButton(false);
+      closeWindow();
     }
   };
 
   const handleOnKeyDown = (event: KeyboardEvent) => {
     if (event.key === "Escape" || event.code === "Escape") {
-      setIsOpen(false);
-      setShowButton(false);
+      closeWindow();
     }
   };
 
   useEffect(() => {
     if (isOpen) {
+      setTimeout(() => setHeight("350px"), 10);
       document.body.addEventListener("click", handleOnClick);
       document.body.addEventListener("keydown", handleOnKeyDown);
       return () => {
         document.body.removeEventListener("click", handleOnClick);
         document.body.removeEventListener("keydown", handleOnKeyDown);
       };
+    } else {
+      setHeight("0px");
     }
   }, [isOpen]);
 
@@ -105,20 +123,29 @@ const DemoList = () => {
       <Button
         ref={buttonRef}
         onClick={() => setIsOpen(!isOpen)}
-        show={showButton}
+        $show={showButton || isOpen}
         onMouseEnter={() => setShowButton(true)}
       >
-        Open Menu
+        <svg xmlns="http://www.w3.org/2000/svg" height="30px" width="30px" viewBox="0 -960 960 960" fill="#ffffff">
+          <path d="M240-160q-33 0-56.5-23.5T160-240q0-33 23.5-56.5T240-320q33 0 56.5 23.5T320-240q0 33-23.5 56.5T240-160Zm240 0q-33 0-56.5-23.5T400-240q0-33 23.5-56.5T480-320q33 0 56.5 23.5T560-240q0 33-23.5 56.5T480-160Zm240 0q-33 0-56.5-23.5T640-240q0-33 23.5-56.5T720-320q33 0 56.5 23.5T800-240q0 33-23.5 56.5T720-160ZM240-400q-33 0-56.5-23.5T160-480q0-33 23.5-56.5T240-560q33 0 56.5 23.5T320-480q0 33-23.5 56.5T240-400Zm240 0q-33 0-56.5-23.5T400-480q0-33 23.5-56.5T480-560q33 0 56.5 23.5T560-480q0 33-23.5 56.5T480-400Zm240 0q-33 0-56.5-23.5T640-480q0-33 23.5-56.5T720-560q33 0 56.5 23.5T800-480q0 33-23.5 56.5T720-400ZM240-640q-33 0-56.5-23.5T160-720q0-33 23.5-56.5T240-800q33 0 56.5 23.5T320-720q0 33-23.5 56.5T240-640Zm240 0q-33 0-56.5-23.5T400-720q0-33 23.5-56.5T480-800q33 0 56.5 23.5T560-720q0 33-23.5 56.5T480-640Zm240 0q-33 0-56.5-23.5T640-720q0-33 23.5-56.5T720-800q33 0 56.5 23.5T800-720q0 33-23.5 56.5T720-640Z" />
+        </svg>
       </Button>
       {isOpen && (
         <Overlay>
-          <Subwindow ref={windowRef}>
-            <DemoLink to="/">Home</DemoLink>
-            <DemoLink to="/word-vortex">Word Vortex</DemoLink>
-            <DemoLink to="/game">Game</DemoLink>
-            <DemoLink to="/settings">Settings</DemoLink>
-            <DemoLink to="/profile">Profile</DemoLink>
-            <DemoLink to="/help">Help</DemoLink>
+          <Subwindow ref={windowRef} $height={height}>
+            <Container>
+              <DemoLink to="/">Home</DemoLink>
+              <DemoLink to="/word-vortex">Word Vortex</DemoLink>
+              <DemoLink to="/">Isoi juttui tulos</DemoLink>
+              <DemoLink to="/">Isoi juttui tulos</DemoLink>
+              <DemoLink to="/">Isoi juttui tulos</DemoLink>
+              <DemoLink to="/">Isoi juttui tulos</DemoLink>
+              <DemoLink to="/">Isoi juttui tulos</DemoLink>
+              <DemoLink to="/">Isoi juttui tulos</DemoLink>
+              <DemoLink to="/">Isoi juttui tulos</DemoLink>
+              <DemoLink to="/">Isoi juttui tulos</DemoLink>
+              <DemoLink to="/">Isoi juttui tulos</DemoLink>
+            </Container>
           </Subwindow>
         </Overlay>
       )}

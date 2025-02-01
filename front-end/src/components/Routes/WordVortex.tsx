@@ -33,14 +33,14 @@ G = ((S - Smin) * (Gmax - Gmin)) / (Smax - Smin) + Gmin
 */
 
 interface TextProps {
-  radius: number;
-  duration: number;
+  $radius: number;
+  $duration: number;
 }
 
 const Text = styled.p<TextProps>`
-  font-size: ${(props) => ((props.radius - 50) * (60 - 10)) / (400 - 50) + 10}px;
+  font-size: ${(props) => ((props.$radius - 50) * (60 - 10)) / (400 - 50) + 10}px;
   position: absolute;
-  animation: ${(props) => circle(props.radius)} ${(props) => props.duration}s linear infinite;
+  animation: ${(props) => circle(props.$radius)} ${(props) => props.$duration}s linear infinite;
 `;
 
 const getRandomArbitrary = (min: number, max: number) => {
@@ -67,7 +67,7 @@ const WordVordex = () => {
       <Div>
         {vortexNumbers.map((element, index) => {
           return (
-            <Text key={index} radius={element[0]} duration={element[1]}>
+            <Text key={index} $radius={element[0]} $duration={element[1]}>
               haloo
             </Text>
           );

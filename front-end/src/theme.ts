@@ -1,15 +1,16 @@
 import { DefaultTheme } from "styled-components";
 
 const theme: DefaultTheme = {
-  borderRadius: 2,
+  borderRadius: "6px",
   palette: {
     common: {
       black: "black",
       white: "white"
     },
-    primary: "rgb(22, 22, 22)",
+    primary: "rgb(28, 28, 30)",
     secondary: "white",
-    dark: "rgb(12, 12, 12)"
+    dark: "rgb(12, 12, 12)",
+    menu: "rgba(0,0,0,0.8)"
   },
   typography: {
     fontSizes: {
