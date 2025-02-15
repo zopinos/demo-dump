@@ -25,7 +25,7 @@ const Subwindow = styled.div<{ $height: string }>`
   background: ${({ theme }) => theme.palette.menu};
   border-radius: ${({ theme }) => theme.borderRadius};
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
-  width: 350px;
+  width: 600px;
   overflow-y: auto;
   padding: 0px;
   height: ${({ $height }) => $height};
@@ -69,7 +69,7 @@ const Button = styled.button<{ $show: boolean }>`
   border-radius: 100%;
   cursor: pointer;
   transform: ${({ $show }) => ($show ? "translateY(70px)" : "translateY(0)")};
-  transition: transform 300ms;
+  transition: transform 270ms;
 `;
 
 const DemoList = () => {
@@ -105,7 +105,7 @@ const DemoList = () => {
 
   useEffect(() => {
     if (isOpen) {
-      setTimeout(() => setHeight("350px"), 10);
+      setTimeout(() => setHeight("500px"), 10);
       document.body.addEventListener("click", handleOnClick);
       document.body.addEventListener("keydown", handleOnKeyDown);
       return () => {
@@ -135,8 +135,8 @@ const DemoList = () => {
           <Subwindow ref={windowRef} $height={height}>
             <Container>
               <DemoLink to="/">Home</DemoLink>
+              <DemoLink to="/photo-dump">Photo Dump</DemoLink>
               <DemoLink to="/word-vortex">Word Vortex</DemoLink>
-              <DemoLink to="/">Isoi juttui tulos</DemoLink>
               <DemoLink to="/">Isoi juttui tulos</DemoLink>
               <DemoLink to="/">Isoi juttui tulos</DemoLink>
               <DemoLink to="/">Isoi juttui tulos</DemoLink>

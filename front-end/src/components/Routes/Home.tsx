@@ -16,10 +16,12 @@ const Page = styled.div`
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  width: 30em;
+  padding: 0 20px;
+  width: auto;
+  max-width: 30em;
 `;
 
-const Img = styled.img`
+const TutorialImg = styled.img`
   position: fixed;
   top: 90px;
   left: 49%;
@@ -29,10 +31,10 @@ const Img = styled.img`
 const Home = () => {
   return (
     <Base>
-      <Img draggable="false" src="src/assets/20250201_233506_2.png" />
+      <TutorialImg draggable="false" src="src/assets/20250201_233506_2.png" />
       <Page>
-        <H1>Demo Dump</H1>
-        <P>Hello and welcome to demo dump! This is a collection of stuff (mostly visual) I have made.</P>
+        <H1 $whiteFont>DEMO DUMP</H1>
+        <P $whiteFont>Hello and welcome to demo dump! This is a collection of stuff (mostly visual) I have made.</P>
       </Page>
     </Base>
   );

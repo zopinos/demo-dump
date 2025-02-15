@@ -4,6 +4,7 @@ import { ThemeProvider, createGlobalStyle } from "styled-components";
 import theme from "./theme";
 import WordVortex from "./components/Routes/WordVortex";
 import DemoList from "./components/DemoList";
+import PhotoDump from "./components/Routes/PhotoDump";
 
 const GlobalStyle = createGlobalStyle`
   body {
@@ -12,6 +13,7 @@ const GlobalStyle = createGlobalStyle`
     height: 100vh;
     color: ${({ theme }) => theme.palette.primary};
     background-color: ${({ theme }) => theme.palette.secondary};
+    scrollbar-gutter: stable both-edges;
   }
   #root {
     display: flex;
@@ -28,6 +30,7 @@ const App = () => {
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/word-vortex" element={<WordVortex />} />
+          <Route path="/photo-dump" element={<PhotoDump />} />
         </Routes>
         <DemoList />
       </ThemeProvider>

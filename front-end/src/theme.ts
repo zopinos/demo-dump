@@ -14,11 +14,11 @@ const theme: DefaultTheme = {
   },
   typography: {
     fontSizes: {
-      body: "16px",
-      heading: "36px"
+      body: "18px",
+      heading: "42px"
     },
     fonts: {
-      main: "Open Sans, sans-serif"
+      main: "Courier New, monospace"
     },
     fontWeights: {
       normal: 400,
