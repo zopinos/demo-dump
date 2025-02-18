@@ -34,7 +34,7 @@ const Home = () => {
       <TutorialImg draggable="false" src="src/assets/20250201_233506_2.png" />
       <Page>
         <H1 $whiteFont>DEMO DUMP</H1>
-        <P $whiteFont>Hello and welcome to demo dump! This is a collection of stuff (mostly visual) I have made.</P>
+        <P $whiteFont>My visual sandbox.</P>
       </Page>
     </Base>
   );
