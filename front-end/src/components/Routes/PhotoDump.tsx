@@ -1,6 +1,7 @@
 import styled, { createGlobalStyle } from "styled-components";
-import { H1 } from "../StyledElements";
+import { CircleButton, H1 } from "../StyledElements";
 import { useEffect, useRef, useState } from "react";
+import { Close } from "../Icons";
 
 const imagePaths = Array.from({ length: 32 }, (_, i) => `/photodump/${i}.jpg`);
 
@@ -80,13 +81,10 @@ const Highlighting = styled.div`
 `;
 
 const BigImage = styled.img`
-  position: fixed;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
   max-width: 85vw;
   max-height: 85vh;
   object-fit: contain;
+  margin: 0 2em;
 
   -webkit-user-select: none;
   -ms-user-select: none;
@@ -100,36 +98,29 @@ const Overlay = styled.div`
   width: 100%;
   height: 100%;
   display: flex;
+  flex-direction: row;
   justify-content: center;
   align-items: center;
   background: rgba(0, 0, 0, 0.8);
 `;
 
-const CloseButton = styled.button`
-  display: flex;
-  align-items: center;
-  justify-content: center;
+const CloseButton = styled(CircleButton)`
   position: fixed;
   top: 20px;
   right: 20px;
-  padding: 0;
-  width: 60px;
-  height: 60px;
-  background: rgba(0, 0, 0, 0.7);
-  color: white;
-  border: none;
-  border-radius: 100%;
-  cursor: pointer;
-
-  &:hover {
-    background: rgb(0, 0, 0);
-  }
 `;
 
 const PhotoDump = () => {
   const bigImageRef = useRef<HTMLImageElement | null>(null);
 
   const [imageOpen, setImageOpen] = useState<string | null>(null);
+  const [imageIndex, setImageIndexState] = useState<number | null>(null);
+
+  const setImageIndex = (index: number | null) => {
+    if (index && index < 0) setImageIndexState(0);
+    else if (index && index > posts.length - 1) setImageIndexState(posts.length - 1);
+    else setImageIndexState(index);
+  };
 
   const handleOnClick = (event: MouseEvent) => {
     if (bigImageRef.current && !event.composedPath().includes(bigImageRef.current)) {
@@ -138,8 +129,12 @@ const PhotoDump = () => {
   };
 
   const handleOnKeyDown = (event: KeyboardEvent) => {
-    if (event.key === "Escape" || event.code === "Escape") {
+    if (event.code === "Escape") {
       setImageOpen(null);
+    } else if (event.code === "ArrowRight") {
+      setImageIndex(imageIndex !== null ? imageIndex + 1 : null);
+    } else if (event.code === "ArrowLeft") {
+      setImageIndex(imageIndex !== null ? imageIndex - 1 : null);
     }
   };
 
@@ -157,14 +152,24 @@ const PhotoDump = () => {
     }
   }, [imageOpen]);
 
+  useEffect(() => {
+    setImageOpen(imageIndex !== null ? posts[imageIndex] : null);
+  }, [imageIndex]);
+
   return (
     <Base>
       <Page>
         <GlobalStyle $disableScroll={!!imageOpen} />
         <H1>PHOTO DUMP</H1>
         <Container>
-          {posts.map((post) => (
-            <Post key={post} onClick={() => setImageOpen(post)}>
+          {posts.map((post, index) => (
+            <Post
+              key={post}
+              onClick={() => {
+                setImageOpen(post);
+                setImageIndex(index);
+              }}
+            >
               <Image src={post} alt="sorry, this will come later" draggable="false" />
               <Highlighting className="overlay" />
             </Post>
@@ -174,15 +179,7 @@ const PhotoDump = () => {
           <Overlay>
             <BigImage src={imageOpen} draggable="false" ref={bigImageRef} />
             <CloseButton>
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                height="24px"
-                viewBox="0 -960 960 960"
-                width="24px"
-                fill="#FFFFFF"
-              >
-                <path d="m256-200-56-56 224-224-224-224 56-56 224 224 224-224 56 56-224 224 224 224-56 56-224-224-224 224Z" />
-              </svg>
+              <Close />
             </CloseButton>
           </Overlay>
         )}
