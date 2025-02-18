@@ -2,22 +2,36 @@ import styled, { keyframes, ThemeProvider } from "styled-components";
 import theme from "../../theme";
 import { words } from "../../constants";
 
-const Div = styled.div`
+const circle = (radius: number) => keyframes`
+  from{
+    transform: rotate(${radius}deg) translate(-${radius}px) rotate(${-90}deg);
+  }
+  to{
+    transform: rotate(${radius + 360}deg) translate(-${radius}px) rotate(${-90}deg);
+  }
+`;
+
+const orbit = (radius: number) => keyframes`
+  from{
+    transform: rotate(${radius}deg) translate(-${radius}px) rotate(${360 - radius}deg);
+  }
+  to{
+    transform: rotate(${radius + 360}deg) translate(-${radius}px) rotate(${0 - radius}deg);
+  }
+`;
+
+const Container = styled.div`
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 1px;
+  height: 1px;
   display: flex;
   align-items: center;
   justify-content: center;
-  height: 100vh;
-  color: ${(props) => props.theme.palette.primary};
-  background-color: ${(props) => props.theme.palette.secondary};
-`;
-
-const circle = (radius: number) => keyframes`
-  from{
-    transform: rotate(${radius}deg) translate(-${radius}px) rotate(-90deg);
-  }
-  to{
-    transform: rotate(${radius + 360}deg) translate(-${radius}px) rotate(-90deg);
-  }
+  color: ${({ theme }) => theme.palette.primary};
+  background-color: ${({ theme }) => theme.palette.secondary};
 `;
 
 /*
@@ -44,6 +58,23 @@ const Text = styled.p<TextProps>`
   animation: ${(props) => circle(props.$radius)} ${(props) => props.$duration}s linear infinite;
 `;
 
+interface TextContainerProps {
+  $radius: number;
+}
+
+const TextContainer = styled.div<TextContainerProps>`
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 1px;
+  height: 1px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  //animation: ${({ $radius }) => orbit($radius / 5)} 5s linear infinite;
+`;
+
 const getRandomArbitrary = (min: number, max: number) => {
   return Math.random() * (max - min) + min;
 };
@@ -66,15 +97,17 @@ const vortexNumbers = getRandomizedVortexNumbers(150, 50, 400, 2, 3);
 const WordVortex = () => {
   return (
     <ThemeProvider theme={theme}>
-      <Div>
+      <Container>
         {vortexNumbers.map((element, index) => {
           return (
-            <Text key={index} $radius={element[0]} $duration={element[1]}>
-              {words[element[2]]}
-            </Text>
+            <TextContainer key={index} $radius={element[0]}>
+              <Text key={index} $radius={element[0]} $duration={element[1]}>
+                {words[element[2]]}
+              </Text>
+            </TextContainer>
           );
         })}
-      </Div>
+      </Container>
     </ThemeProvider>
   );
 };
