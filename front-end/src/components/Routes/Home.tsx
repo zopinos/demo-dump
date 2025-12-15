@@ -36,7 +36,7 @@ const ButtonHint = styled.div`
   border-radius: 100%;
   border-style: dashed;
   border-color: #ffffff;
-`
+`;
 
 const Home = () => {
   return (
@@ -44,7 +44,7 @@ const Home = () => {
       <ButtonHint />
       <TutorialImg draggable="false" src="src/assets/20250201_233506_2.png" />
       <Page>
-        <H1 $whiteFont>DEMO DUMP</H1>
+        <H1 $whiteFont>demo-dump</H1>
         <P $whiteFont>My visual sandbox.</P>
       </Page>
     </Base>

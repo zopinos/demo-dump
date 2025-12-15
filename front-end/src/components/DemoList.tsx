@@ -8,46 +8,6 @@ const Base = styled.div`
   justify-content: center;
 `;
 
-const Overlay = styled.div`
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  //background: rgba(0, 0, 0, 0.5);
-`;
-
-const Subwindow = styled.div<{ $height: string }>`
-  position: fixed;
-  top: 80px;
-  background: ${({ theme }) => theme.palette.menu};
-  border-radius: ${({ theme }) => theme.borderRadius};
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
-  width: 600px;
-  overflow-y: auto;
-  padding: 0px;
-  height: ${({ $height }) => $height};
-  transition: height 200ms ease-out;
-`;
-
-const Container = styled.div`
-  padding: 30px;
-`;
-
-const DemoLink = styled(Link)`
-  display: block;
-  padding: 10px;
-  color: ${({ theme }) => theme.palette.secondary};
-  text-decoration: none;
-  &:hover {
-    text-decoration: underline;
-  }
-  font-family: ${({ theme }) => theme.typography.fonts.main};
-`;
-
 const Trigger = styled.div`
   position: fixed;
   top: 0;
@@ -59,7 +19,7 @@ const Trigger = styled.div`
   }
 `;
 
-const ListButton = styled.button<{ $show: boolean }>`
+const MenuButton = styled.button<{ $show: boolean }>`
   display: flex;
   align-items: center;
   justify-content: center;
@@ -82,28 +42,70 @@ const ListButton = styled.button<{ $show: boolean }>`
   }
 `;
 
-const InfoButton = styled.button`
+const Overlay = styled.div`
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
   display: flex;
-  align-items: center;
   justify-content: center;
+  align-items: center;
+  //background: rgba(0, 0, 0, 0.5);
+`;
+
+const menuHeight = "80%";
+const MenuWindow = styled.div<{ $height: string }>`
   position: fixed;
   top: 80px;
-  right: 600px;
-  padding: 0;
-  width: 50px;
-  height: 50px;
+  display: flex;
   background: ${({ theme }) => theme.palette.menu};
+  border-radius: ${({ theme }) => theme.borderRadius};
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+  width: 60%;
+  overflow-y: ${({ $height }) => ($height == "0px" ? "scroll" : "none")};
+  padding: 0px;
+  height: ${({ $height }) => $height};
+  transition: height 200ms ease-out;
+`;
+
+const MenuContainer = styled.div<{ $flex: string }>`
+  flex: ${({ $flex }) => $flex || "1"};
+  display: flex;
+  margin: 20px;
+  border-style: solid;
+  border-color: ${({ theme }) => theme.palette.secondary};
+  border-width: 1px;
+`;
+
+const LinkList = styled.div`
+  flex: 1;
+  padding: 20px;
+  overflow-y: auto;
+`;
+
+const DemoLink = styled(Link)`
+  display: block;
+  padding: 10px;
   color: ${({ theme }) => theme.palette.secondary};
-  border: none;
-  border-radius: 100%;
-  cursor: pointer;
+  text-decoration: none;
+  &:hover {
+    text-decoration: underline;
+  }
   font-family: ${({ theme }) => theme.typography.fonts.main};
-  font-size: ${({ theme }) => theme.typography.fontSizes.body};
+`;
+
+const InfoBox = styled.div`
+  display: flex;
+  flex-direction: column;
+  padding: 60px;
+  color: ${({ theme }) => theme.palette.secondary};
+  font-family: ${({ theme }) => theme.typography.fonts.main};
 `;
 
 const DemoList = () => {
   const windowRef = useRef<HTMLDivElement | null>(null);
-  const buttonRef = useRef<HTMLButtonElement | null>(null);
+  const menuButtonRef = useRef<HTMLButtonElement | null>(null);
 
   const [isOpen, setIsOpen] = useState<boolean>(false);
   const [height, setHeight] = useState("0px");
@@ -116,9 +118,9 @@ const DemoList = () => {
   const handleOnClick = (event: MouseEvent) => {
     if (
       windowRef.current &&
-      buttonRef.current &&
+      menuButtonRef.current &&
       !event.composedPath().includes(windowRef.current) &&
-      !event.composedPath().includes(buttonRef.current)
+      !event.composedPath().includes(menuButtonRef.current)
     ) {
       closeWindow();
     }
@@ -132,7 +134,7 @@ const DemoList = () => {
 
   useEffect(() => {
     if (isOpen) {
-      setTimeout(() => setHeight("500px"), 10);
+      setTimeout(() => setHeight(menuHeight), 10);
       document.body.addEventListener("click", handleOnClick);
       document.body.addEventListener("keydown", handleOnKeyDown);
       return () => {
@@ -147,32 +149,29 @@ const DemoList = () => {
   return (
     <Base>
       <Trigger />
-      <ListButton ref={buttonRef} onClick={() => setIsOpen(!isOpen)} $show={isOpen}>
+      <MenuButton ref={menuButtonRef} onClick={() => setIsOpen(!isOpen)} $show={isOpen}>
         <MenuIcon />
-      </ListButton>
+      </MenuButton>
       {isOpen && (
         <Overlay>
-          <Subwindow ref={windowRef} $height={height}>
-            <Container>
-              <DemoLink to="/">[0] Home</DemoLink>
-              <DemoLink to="/photo-dump">[1] Photo Dump</DemoLink>
-              <DemoLink to="/word-vortex">[2] Word Vortex</DemoLink>
-              <DemoLink to="/">[3] Isoi juttui tulos</DemoLink>
-              <DemoLink to="/">Isoi juttui tulos</DemoLink>
-              <DemoLink to="/">Isoi juttui tulos</DemoLink>
-              <DemoLink to="/">Isoi juttui tulos</DemoLink>
-              <DemoLink to="/">Isoi juttui tulos</DemoLink>
-              <DemoLink to="/">Isoi juttui tulos</DemoLink>
-              <DemoLink to="/">Isoi juttui tulos</DemoLink>
-              <DemoLink to="/">Isoi juttui tulos</DemoLink>
-              <DemoLink to="/">Isoi juttui tulos</DemoLink>
-              <DemoLink to="/">Isoi juttui tulos</DemoLink>
-              <DemoLink to="/">Isoi juttui tulos</DemoLink>
-              <DemoLink to="/">Isoi juttui tulos</DemoLink>
-              <DemoLink to="/">Isoi juttui tulos</DemoLink>
-            </Container>
-          </Subwindow>
-          <InfoButton>i</InfoButton>
+          <MenuWindow ref={windowRef} $height={height}>
+            <MenuContainer $flex={"1"}>
+              <LinkList>
+                <DemoLink to="/">[0] Home</DemoLink>
+                <DemoLink to="/photo-dump">[1] Photo Dump</DemoLink>
+                <DemoLink to="/word-vortex">[2] Word Vortex</DemoLink>
+                <DemoLink to="/">[3] Isoi juttui tulos</DemoLink>
+                <DemoLink to="/">Isoi juttui tulos</DemoLink>
+                <DemoLink to="/">Isoi juttui tulos</DemoLink>
+              </LinkList>
+            </MenuContainer>
+            <MenuContainer $flex={"2"}>
+              <InfoBox>
+                <h1>Hello</h1>
+                <p>Content here.</p>
+              </InfoBox>
+            </MenuContainer>
+          </MenuWindow>
         </Overlay>
       )}
     </Base>

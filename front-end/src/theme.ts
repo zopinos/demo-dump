@@ -7,7 +7,7 @@ const theme: DefaultTheme = {
       black: "black",
       white: "white"
     },
-    primary: "rgb(28, 28, 30)",
+    primary: "rgba(22, 22, 26, 1)",
     secondary: "white",
     dark: "rgb(12, 12, 12)",
     menu: "rgba(0,0,0,0.8)"
