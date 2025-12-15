@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
 import styled from "styled-components";
 import { useEffect, useRef, useState } from "react";
+import MenuIcon from "./Icons/MenuIcon";
 
 const Base = styled.div`
   display: flex;
@@ -58,7 +59,7 @@ const Trigger = styled.div`
   }
 `;
 
-const Button = styled.button<{ $show: boolean }>`
+const ListButton = styled.button<{ $show: boolean }>`
   display: flex;
   align-items: center;
   justify-content: center;
@@ -68,7 +69,7 @@ const Button = styled.button<{ $show: boolean }>`
   width: 60px;
   height: 60px;
   background: ${({ theme }) => theme.palette.menu};
-  color: white;
+  color: ${({ theme }) => theme.palette.secondary};
   border: none;
   border-radius: 100%;
   cursor: pointer;
@@ -79,6 +80,25 @@ const Button = styled.button<{ $show: boolean }>`
   &:hover {
     transform: translateY(70px);
   }
+`;
+
+const InfoButton = styled.button`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: fixed;
+  top: 80px;
+  right: 600px;
+  padding: 0;
+  width: 50px;
+  height: 50px;
+  background: ${({ theme }) => theme.palette.menu};
+  color: ${({ theme }) => theme.palette.secondary};
+  border: none;
+  border-radius: 100%;
+  cursor: pointer;
+  font-family: ${({ theme }) => theme.typography.fonts.main};
+  font-size: ${({ theme }) => theme.typography.fontSizes.body};
 `;
 
 const DemoList = () => {
@@ -127,22 +147,21 @@ const DemoList = () => {
   return (
     <Base>
       <Trigger />
-      <Button
-        ref={buttonRef}
-        onClick={() => setIsOpen(!isOpen)}
-        $show={isOpen}
-      >
-        <svg xmlns="http://www.w3.org/2000/svg" height="30px" width="30px" viewBox="0 -960 960 960" fill="#ffffff">
-          <path d="M240-160q-33 0-56.5-23.5T160-240q0-33 23.5-56.5T240-320q33 0 56.5 23.5T320-240q0 33-23.5 56.5T240-160Zm240 0q-33 0-56.5-23.5T400-240q0-33 23.5-56.5T480-320q33 0 56.5 23.5T560-240q0 33-23.5 56.5T480-160Zm240 0q-33 0-56.5-23.5T640-240q0-33 23.5-56.5T720-320q33 0 56.5 23.5T800-240q0 33-23.5 56.5T720-160ZM240-400q-33 0-56.5-23.5T160-480q0-33 23.5-56.5T240-560q33 0 56.5 23.5T320-480q0 33-23.5 56.5T240-400Zm240 0q-33 0-56.5-23.5T400-480q0-33 23.5-56.5T480-560q33 0 56.5 23.5T560-480q0 33-23.5 56.5T480-400Zm240 0q-33 0-56.5-23.5T640-480q0-33 23.5-56.5T720-560q33 0 56.5 23.5T800-480q0 33-23.5 56.5T720-400ZM240-640q-33 0-56.5-23.5T160-720q0-33 23.5-56.5T240-800q33 0 56.5 23.5T320-720q0 33-23.5 56.5T240-640Zm240 0q-33 0-56.5-23.5T400-720q0-33 23.5-56.5T480-800q33 0 56.5 23.5T560-720q0 33-23.5 56.5T480-640Zm240 0q-33 0-56.5-23.5T640-720q0-33 23.5-56.5T720-800q33 0 56.5 23.5T800-720q0 33-23.5 56.5T720-640Z" />
-        </svg>
-      </Button>
+      <ListButton ref={buttonRef} onClick={() => setIsOpen(!isOpen)} $show={isOpen}>
+        <MenuIcon />
+      </ListButton>
       {isOpen && (
         <Overlay>
           <Subwindow ref={windowRef} $height={height}>
             <Container>
-              <DemoLink to="/">Home</DemoLink>
-              <DemoLink to="/photo-dump">Photo Dump</DemoLink>
-              <DemoLink to="/word-vortex">Word Vortex</DemoLink>
+              <DemoLink to="/">[0] Home</DemoLink>
+              <DemoLink to="/photo-dump">[1] Photo Dump</DemoLink>
+              <DemoLink to="/word-vortex">[2] Word Vortex</DemoLink>
+              <DemoLink to="/">[3] Isoi juttui tulos</DemoLink>
+              <DemoLink to="/">Isoi juttui tulos</DemoLink>
+              <DemoLink to="/">Isoi juttui tulos</DemoLink>
+              <DemoLink to="/">Isoi juttui tulos</DemoLink>
+              <DemoLink to="/">Isoi juttui tulos</DemoLink>
               <DemoLink to="/">Isoi juttui tulos</DemoLink>
               <DemoLink to="/">Isoi juttui tulos</DemoLink>
               <DemoLink to="/">Isoi juttui tulos</DemoLink>
@@ -153,6 +172,7 @@ const DemoList = () => {
               <DemoLink to="/">Isoi juttui tulos</DemoLink>
             </Container>
           </Subwindow>
+          <InfoButton>i</InfoButton>
         </Overlay>
       )}
     </Base>
