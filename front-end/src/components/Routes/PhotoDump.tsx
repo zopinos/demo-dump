@@ -11,6 +11,7 @@ const GlobalStyle = createGlobalStyle<{ $disableScroll: boolean }>`
   html,
   body {
     overflow: ${({ $disableScroll }) => ($disableScroll ? "hidden" : "auto")};
+    background-color: ${({ theme }) => theme.palette.common.white};
   }
 `;
 
@@ -20,7 +21,6 @@ const Base = styled.div`
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  background-color: ${({ theme }) => theme.palette.common};
 `;
 
 const Page = styled.div`
