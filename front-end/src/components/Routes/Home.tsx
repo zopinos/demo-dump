@@ -28,9 +28,20 @@ const TutorialImg = styled.img`
   height: 150px;
 `;
 
+const ButtonHint = styled.div`
+  position: fixed;
+  top: 7px;
+  height: 60px;
+  width: 60px;
+  border-radius: 100%;
+  border-style: dashed;
+  border-color: #ffffff;
+`
+
 const Home = () => {
   return (
     <Base>
+      <ButtonHint />
       <TutorialImg draggable="false" src="src/assets/20250201_233506_2.png" />
       <Page>
         <H1 $whiteFont>DEMO DUMP</H1>

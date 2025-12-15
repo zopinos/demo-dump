@@ -52,6 +52,10 @@ const Trigger = styled.div`
   top: 0;
   height: 90px;
   width: 150px;
+
+  &:hover + button {
+    transform: translateY(70px);
+  }
 `;
 
 const Button = styled.button<{ $show: boolean }>`
@@ -68,8 +72,13 @@ const Button = styled.button<{ $show: boolean }>`
   border: none;
   border-radius: 100%;
   cursor: pointer;
-  transform: ${({ $show }) => ($show ? "translateY(70px)" : "translateY(0)")};
+
+  ${({ $show }) => ($show ? "transform: translateY(70px)" : "")};
   transition: transform 270ms;
+
+  &:hover {
+    transform: translateY(70px);
+  }
 `;
 
 const DemoList = () => {
@@ -77,13 +86,11 @@ const DemoList = () => {
   const buttonRef = useRef<HTMLButtonElement | null>(null);
 
   const [isOpen, setIsOpen] = useState<boolean>(false);
-  const [showButton, setShowButton] = useState<boolean>(false);
   const [height, setHeight] = useState("0px");
 
   const closeWindow = () => {
     setHeight("0px");
     setTimeout(() => setIsOpen(false), 300);
-    setTimeout(() => setShowButton(false), 300);
   };
 
   const handleOnClick = (event: MouseEvent) => {
@@ -119,12 +126,11 @@ const DemoList = () => {
 
   return (
     <Base>
-      <Trigger onMouseEnter={() => setShowButton(true)} onMouseLeave={() => setShowButton(false)} />
+      <Trigger />
       <Button
         ref={buttonRef}
         onClick={() => setIsOpen(!isOpen)}
-        $show={showButton || isOpen}
-        onMouseEnter={() => setShowButton(true)}
+        $show={isOpen}
       >
         <svg xmlns="http://www.w3.org/2000/svg" height="30px" width="30px" viewBox="0 -960 960 960" fill="#ffffff">
           <path d="M240-160q-33 0-56.5-23.5T160-240q0-33 23.5-56.5T240-320q33 0 56.5 23.5T320-240q0 33-23.5 56.5T240-160Zm240 0q-33 0-56.5-23.5T400-240q0-33 23.5-56.5T480-320q33 0 56.5 23.5T560-240q0 33-23.5 56.5T480-160Zm240 0q-33 0-56.5-23.5T640-240q0-33 23.5-56.5T720-320q33 0 56.5 23.5T800-240q0 33-23.5 56.5T720-160ZM240-400q-33 0-56.5-23.5T160-480q0-33 23.5-56.5T240-560q33 0 56.5 23.5T320-480q0 33-23.5 56.5T240-400Zm240 0q-33 0-56.5-23.5T400-480q0-33 23.5-56.5T480-560q33 0 56.5 23.5T560-480q0 33-23.5 56.5T480-400Zm240 0q-33 0-56.5-23.5T640-480q0-33 23.5-56.5T720-560q33 0 56.5 23.5T800-480q0 33-23.5 56.5T720-400ZM240-640q-33 0-56.5-23.5T160-720q0-33 23.5-56.5T240-800q33 0 56.5 23.5T320-720q0 33-23.5 56.5T240-640Zm240 0q-33 0-56.5-23.5T400-720q0-33 23.5-56.5T480-800q33 0 56.5 23.5T560-720q0 33-23.5 56.5T480-640Zm240 0q-33 0-56.5-23.5T640-720q0-33 23.5-56.5T720-800q33 0 56.5 23.5T800-720q0 33-23.5 56.5T720-640Z" />
