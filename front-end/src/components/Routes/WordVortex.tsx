@@ -1,6 +1,13 @@
-import styled, { keyframes, ThemeProvider } from "styled-components";
+import styled, { createGlobalStyle, keyframes, ThemeProvider } from "styled-components";
 import theme from "../../theme";
 import { words } from "../../constants";
+
+const GlobalStyle = createGlobalStyle`
+  html,
+  body {
+    background-color: #fff2c5;
+  }
+`;
 
 const circle = (radius: number) => keyframes`
   from{
@@ -31,7 +38,7 @@ const Container = styled.div`
   align-items: center;
   justify-content: center;
   color: ${({ theme }) => theme.palette.primary};
-  background-color: ${({ theme }) => theme.palette.secondary};
+  font-family: 'Times New Roman', Times, serif;
 `;
 
 /*
@@ -95,20 +102,23 @@ const getRandomizedVortexNumbers = (
 const vortexNumbers = getRandomizedVortexNumbers(150, 50, 400, 2, 3);
 
 const WordVortex = () => {
+  document.body.style.backgroundColor = '#fff2c5;';
+
   return (
-    <ThemeProvider theme={theme}>
-      <Container>
-        {vortexNumbers.map((element, index) => {
-          return (
-            <TextContainer key={index} $radius={element[0]}>
-              <Text key={index} $radius={element[0]} $duration={element[1]}>
-                {words[element[2]]}
-              </Text>
-            </TextContainer>
-          );
-        })}
-      </Container>
-    </ThemeProvider>
+      <ThemeProvider theme={theme}>
+        <GlobalStyle />
+        <Container>
+          {vortexNumbers.map((element, index) => {
+            return (
+              <TextContainer key={index} $radius={element[0]}>
+                <Text key={index} $radius={element[0]} $duration={element[1]}>
+                  {words[element[2]]}
+                </Text>
+              </TextContainer>
+            );
+          })}
+        </Container>
+      </ThemeProvider>
   );
 };
 
