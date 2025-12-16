@@ -1,21 +1,14 @@
-export interface DemoSection {
-  title: string;
-  description: string;
-}
+// @ts-ignore: imported raw markdown without type declarations
+import homeReadme from "./components/demos/home/README.md?raw";
+// @ts-ignore: imported raw markdown without type declarations
+import wordVortexReadme from "./components/demos/word-vortex/README.md?raw";
+// @ts-ignore: imported raw markdown without type declarations
+import photoDumpReadme from "./components/demos/photo-dump/README.md?raw";
 
-const demoInfo: Record<string, DemoSection> = {
-  home: {
-    title: "demo-dump",
-    description: "Content. Another line."
-  },
-  wordVortex: {
-    title: "Word Vortex",
-    description: "This is word vortex."
-  },
-  photoDump: {
-    title: "Photo Dump",
-    description: "This is photo dump."
-  }
+const demoInfo: Record<string, string> = {
+  home: homeReadme,
+  wordVortex: wordVortexReadme,
+  photoDump: photoDumpReadme
 };
 
 export default demoInfo;

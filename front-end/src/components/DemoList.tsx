@@ -2,7 +2,8 @@ import { Link, useLocation } from "react-router-dom";
 import styled from "styled-components";
 import { useEffect, useRef, useState } from "react";
 import MenuIcon from "./icons/MenuIcon";
-import demoInfo, { DemoSection } from "../demoInfo";
+import demoInfo from "../demoInfo";
+import ReactMarkdown from "react-markdown";
 
 const Base = styled.div`
   display: flex;
@@ -112,7 +113,7 @@ const DemoList = () => {
   const [isOpen, setIsOpen] = useState<boolean>(false);
   const [height, setHeight] = useState("0px");
 
-  const getInfoForRoute = (route: string): DemoSection => {
+  const getInfoForRoute = (route: string): string => {
     switch (route) {
       case "/":
         return demoInfo.home;
@@ -173,8 +174,8 @@ const DemoList = () => {
             <MenuContainer $flex={"1"}>
               <LinkList>
                 <DemoLink to="/">[0] Home</DemoLink>
-                <DemoLink to="/photo-dump">[1] Photo Dump</DemoLink>
-                <DemoLink to="/word-vortex">[2] Word Vortex</DemoLink>
+                <DemoLink to="/word-vortex">[1] Word Vortex</DemoLink>
+                <DemoLink to="/photo-dump">[2] Photo Dump</DemoLink>
                 <DemoLink to="/">[3] Isoi juttui tulos</DemoLink>
                 <DemoLink to="/">Isoi juttui tulos</DemoLink>
                 <DemoLink to="/">Isoi juttui tulos</DemoLink>
@@ -182,8 +183,7 @@ const DemoList = () => {
             </MenuContainer>
             <MenuContainer $flex={"2"}>
               <InfoBox>
-                <h1>{getInfoForRoute(location.pathname).title}</h1>
-                <p>{getInfoForRoute(location.pathname).description}</p>
+                <ReactMarkdown>{getInfoForRoute(location.pathname)}</ReactMarkdown>
               </InfoBox>
             </MenuContainer>
           </MenuWindow>
