@@ -5,6 +5,7 @@ import theme from "./theme";
 import WordVortex from "./components/demos/word-vortex/WordVortex";
 import DemoList from "./components/DemoList";
 import PhotoDump from "./components/demos/photo-dump/PhotoDump";
+import DragNThrow from "./components/demos/drag-n-throw/DragNThrow";
 
 const GlobalStyle = createGlobalStyle`
   body {
@@ -31,6 +32,7 @@ const App = () => {
           <Route path="/" element={<Home />} />
           <Route path="/word-vortex" element={<WordVortex />} />
           <Route path="/photo-dump" element={<PhotoDump />} />
+          <Route path="/drag-n-throw" element={<DragNThrow />} />
         </Routes>
         <DemoList />
       </ThemeProvider>

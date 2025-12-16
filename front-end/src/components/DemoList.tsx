@@ -121,6 +121,8 @@ const DemoList = () => {
         return demoInfo.photoDump;
       case "/word-vortex":
         return demoInfo.wordVortex;
+      case "/drag-n-throw":
+        return demoInfo.dragNThrow;
       default:
         return demoInfo.home;
     }
@@ -176,9 +178,7 @@ const DemoList = () => {
                 <DemoLink to="/">[0] Home</DemoLink>
                 <DemoLink to="/word-vortex">[1] Word Vortex</DemoLink>
                 <DemoLink to="/photo-dump">[2] Photo Dump</DemoLink>
-                <DemoLink to="/">[3] Isoi juttui tulos</DemoLink>
-                <DemoLink to="/">Isoi juttui tulos</DemoLink>
-                <DemoLink to="/">Isoi juttui tulos</DemoLink>
+                <DemoLink to="/drag-n-throw">[3] Drag N Throw</DemoLink>
               </LinkList>
             </MenuContainer>
             <MenuContainer $flex={"2"}>
