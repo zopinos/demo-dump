@@ -1,7 +1,7 @@
 import styled, { createGlobalStyle } from "styled-components";
-import { CircleButton, H1 } from "../StyledElements";
+import { CircleButton, H1 } from "../../StyledElements";
 import { useEffect, useRef, useState } from "react";
-import { Close } from "../Icons";
+import CloseIcon from "../../icons/CloseIcon";
 
 const imagePaths = Array.from({ length: 32 }, (_, i) => `/photodump/${i}.jpg`);
 
@@ -179,7 +179,7 @@ const PhotoDump = () => {
           <Overlay>
             <BigImage src={imageOpen} draggable="false" ref={bigImageRef} />
             <CloseButton>
-              <Close />
+              <CloseIcon />
             </CloseButton>
           </Overlay>
         )}

@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { H1, P } from "../StyledElements";
+import { H1, P } from "../../StyledElements";
 
 const Base = styled.div`
   display: flex;

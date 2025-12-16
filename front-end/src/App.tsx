@@ -1,10 +1,10 @@
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import Home from "./components/Routes/Home";
+import Home from "./components/demos/home/Home";
 import { ThemeProvider, createGlobalStyle } from "styled-components";
 import theme from "./theme";
-import WordVortex from "./components/Routes/WordVortex";
+import WordVortex from "./components/demos/word-vortex/WordVortex";
 import DemoList from "./components/DemoList";
-import PhotoDump from "./components/Routes/PhotoDump";
+import PhotoDump from "./components/demos/photo-dump/PhotoDump";
 
 const GlobalStyle = createGlobalStyle`
   body {

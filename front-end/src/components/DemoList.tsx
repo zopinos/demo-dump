@@ -1,7 +1,8 @@
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import styled from "styled-components";
 import { useEffect, useRef, useState } from "react";
-import MenuIcon from "./Icons/MenuIcon";
+import MenuIcon from "./icons/MenuIcon";
+import demoInfo, { DemoSection } from "../demoInfo";
 
 const Base = styled.div`
   display: flex;
@@ -104,11 +105,25 @@ const InfoBox = styled.div`
 `;
 
 const DemoList = () => {
+  const location = useLocation();
   const windowRef = useRef<HTMLDivElement | null>(null);
   const menuButtonRef = useRef<HTMLButtonElement | null>(null);
 
   const [isOpen, setIsOpen] = useState<boolean>(false);
   const [height, setHeight] = useState("0px");
+
+  const getInfoForRoute = (route: string): DemoSection => {
+    switch (route) {
+      case "/":
+        return demoInfo.home;
+      case "/photo-dump":
+        return demoInfo.photoDump;
+      case "/word-vortex":
+        return demoInfo.wordVortex;
+      default:
+        return demoInfo.home;
+    }
+  };
 
   const closeWindow = () => {
     setHeight("0px");
@@ -167,8 +182,8 @@ const DemoList = () => {
             </MenuContainer>
             <MenuContainer $flex={"2"}>
               <InfoBox>
-                <h1>Hello</h1>
-                <p>Content here.</p>
+                <h1>{getInfoForRoute(location.pathname).title}</h1>
+                <p>{getInfoForRoute(location.pathname).description}</p>
               </InfoBox>
             </MenuContainer>
           </MenuWindow>
