@@ -80,6 +80,13 @@ const MenuContainer = styled.div<{ $flex: string }>`
   border-width: 1px;
 `;
 
+const MenuDiv = styled.div`
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  margin: 0px;
+`;
+
 const LinkList = styled.div`
   flex: 1;
   padding: 20px;
@@ -103,6 +110,12 @@ const InfoBox = styled.div`
   padding: 60px;
   color: ${({ theme }) => theme.palette.secondary};
   font-family: ${({ theme }) => theme.typography.fonts.main};
+`;
+
+const ProfileImg = styled.img`
+  border-radius: 100%;
+  width: 80px;
+  height: 80px;
 `;
 
 const DemoList = () => {
@@ -171,16 +184,22 @@ const DemoList = () => {
       {isOpen && (
         <Overlay>
           <MenuWindow ref={windowRef} $height={height}>
-            <MenuContainer $flex={"1"}>
-              <LinkList>
-                <DemoLink to="/">[0] Home</DemoLink>
-                <DemoLink to="/word-vortex">[1] Word Vortex</DemoLink>
-                <DemoLink to="/photo-dump">[2] Photo Dump</DemoLink>
-                <DemoLink to="/">[3] Isoi juttui tulos</DemoLink>
-                <DemoLink to="/">Isoi juttui tulos</DemoLink>
-                <DemoLink to="/">Isoi juttui tulos</DemoLink>
-              </LinkList>
-            </MenuContainer>
+            <MenuDiv>
+              <MenuContainer $flex={"1"}>
+                <ProfileImg src="https://avatars.githubusercontent.com/u/89577985?v=4" />
+                <div>
+                  <a href="https://github.com/zopinos">zopinos</a>
+                </div>
+              </MenuContainer>
+              <MenuContainer $flex={"5"}>
+                <LinkList>
+                  <DemoLink to="/">[0] Home</DemoLink>
+                  <DemoLink to="/word-vortex">[1] Word Vortex</DemoLink>
+                  <DemoLink to="/photo-dump">[2] Photo Dump</DemoLink>
+                  <DemoLink to="/drag-n-throw">[3] Drag N Throw</DemoLink>
+                </LinkList>
+              </MenuContainer>
+            </MenuDiv>
             <MenuContainer $flex={"2"}>
               <InfoBox>
                 <ReactMarkdown>{getInfoForRoute(location.pathname)}</ReactMarkdown>

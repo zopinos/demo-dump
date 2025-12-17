@@ -2,10 +2,9 @@ import styled, { createGlobalStyle } from "styled-components";
 import { CircleButton, H1 } from "../../StyledElements";
 import { useEffect, useRef, useState } from "react";
 import CloseIcon from "../../icons/CloseIcon";
+import { imagePaths } from "./images";
 
-const imagePaths = Array.from({ length: 32 }, (_, i) => `/photodump/${i}.jpg`);
-
-const posts = imagePaths.map((path) => path).reverse();
+const posts = imagePaths.map((path) => path.replace("/public", "")).reverse();
 
 const GlobalStyle = createGlobalStyle<{ $disableScroll: boolean }>`
   html,
