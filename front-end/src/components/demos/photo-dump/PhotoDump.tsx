@@ -3,6 +3,8 @@ import { CircleButton, H1 } from "../../StyledElements";
 import { useEffect, useRef, useState } from "react";
 import CloseIcon from "../../icons/CloseIcon";
 import { imagePaths } from "./images";
+import RightArrowIcon from "../../icons/RightArrowIcon";
+import LeftArrowIcon from "../../icons/LeftArrowIcon";
 
 const posts = imagePaths.map((path) => path.replace("/public", "")).reverse();
 
@@ -80,7 +82,7 @@ const Highlighting = styled.div`
 `;
 
 const BigImage = styled.img`
-  max-width: 85vw;
+  max-width: 70vw;
   max-height: 85vh;
   object-fit: contain;
   margin: 0 2em;
@@ -109,8 +111,21 @@ const CloseButton = styled(CircleButton)`
   right: 20px;
 `;
 
+const RightArrowButton = styled(CircleButton)`
+  position: fixed;
+  right: 20px;
+  top: 50%;
+  transform: translate(0%, -50%);
+`;
+
+const LeftArrowButton = styled(RightArrowButton)`
+  left: 20px;
+`;
+
 const PhotoDump = () => {
   const bigImageRef = useRef<HTMLImageElement | null>(null);
+  const leftArrowRef = useRef<HTMLButtonElement | null>(null);
+  const rightArrowRef = useRef<HTMLButtonElement | null>(null);
 
   const [imageOpen, setImageOpen] = useState<string | null>(null);
   const [imageIndex, setImageIndexState] = useState<number | null>(null);
@@ -122,7 +137,14 @@ const PhotoDump = () => {
   };
 
   const handleOnClick = (event: MouseEvent) => {
-    if (bigImageRef.current && !event.composedPath().includes(bigImageRef.current)) {
+    if (
+      bigImageRef.current &&
+      !event.composedPath().includes(bigImageRef.current) &&
+      leftArrowRef.current &&
+      !event.composedPath().includes(leftArrowRef.current) &&
+      rightArrowRef.current &&
+      !event.composedPath().includes(rightArrowRef.current)
+    ) {
       setImageOpen(null);
     }
   };
@@ -130,10 +152,10 @@ const PhotoDump = () => {
   const handleOnKeyDown = (event: KeyboardEvent) => {
     if (event.code === "Escape") {
       setImageOpen(null);
-    } else if (event.code === "ArrowRight") {
-      setImageIndex(imageIndex !== null ? imageIndex + 1 : null);
     } else if (event.code === "ArrowLeft") {
       setImageIndex(imageIndex !== null ? imageIndex - 1 : null);
+    } else if (event.code === "ArrowRight") {
+      setImageIndex(imageIndex !== null ? imageIndex + 1 : null);
     }
   };
 
@@ -180,6 +202,22 @@ const PhotoDump = () => {
             <CloseButton>
               <CloseIcon />
             </CloseButton>
+            <LeftArrowButton
+              ref={leftArrowRef}
+              onClick={() => {
+                setImageIndex(imageIndex !== null ? imageIndex - 1 : null);
+              }}
+            >
+              <LeftArrowIcon />
+            </LeftArrowButton>
+            <RightArrowButton
+              ref={rightArrowRef}
+              onClick={() => {
+                setImageIndex(imageIndex !== null ? imageIndex + 1 : null);
+              }}
+            >
+              <RightArrowIcon />
+            </RightArrowButton>
           </Overlay>
         )}
       </Page>
