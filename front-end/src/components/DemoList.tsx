@@ -4,6 +4,8 @@ import { useEffect, useRef, useState } from "react";
 import MenuIcon from "./icons/MenuIcon";
 import demoInfo from "../demoInfo";
 import ReactMarkdown from "react-markdown";
+import { P } from "./StyledElements";
+import theme from "../theme";
 
 const Base = styled.div`
   display: flex;
@@ -114,8 +116,25 @@ const InfoBox = styled.div`
 
 const ProfileImg = styled.img`
   border-radius: 100%;
-  width: 80px;
-  height: 80px;
+  width: 70px;
+  height: 70px;
+`;
+
+const ProfileInfo = styled.div`
+  display: flex;
+  align-items: center;
+  padding: 20px;
+  gap: 14px;
+  color: ${({ theme }) => theme.palette.secondary};
+  font-family: ${({ theme }) => theme.typography.fonts.main};
+`;
+
+const ProfileLink = styled.a`
+  color: #70a9ff;
+
+  &:hover {
+    color: #4678c4;
+  }
 `;
 
 const DemoList = () => {
@@ -186,10 +205,19 @@ const DemoList = () => {
           <MenuWindow ref={windowRef} $height={height}>
             <MenuDiv>
               <MenuContainer $flex={"1"}>
-                <ProfileImg src="https://avatars.githubusercontent.com/u/89577985?v=4" />
-                <div>
-                  <a href="https://github.com/zopinos">zopinos</a>
-                </div>
+                <ProfileInfo>
+                  <ProfileImg src="https://avatars.githubusercontent.com/u/89577985?v=4" />
+                  <div style={{ flexDirection: "column", gap: "0px" }}>
+                    <div style={{ padding: "5px", fontSize: "20px" }}>
+                      <b>zopinos</b>
+                    </div>
+                    <div style={{ padding: "5px" }}>
+                      <ProfileLink href="https://github.com/zopinos" target="_blank">
+                        github
+                      </ProfileLink>
+                    </div>
+                  </div>
+                </ProfileInfo>
               </MenuContainer>
               <MenuContainer $flex={"5"}>
                 <LinkList>
