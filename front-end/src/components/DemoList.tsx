@@ -212,7 +212,7 @@ const DemoList = () => {
                       <b>zopinos</b>
                     </div>
                     <div style={{ padding: "5px" }}>
-                      <ProfileLink href="https://github.com/zopinos" target="_blank">
+                      <ProfileLink href="https://github.com/zopinos/demo-dump" target="_blank">
                         github
                       </ProfileLink>
                     </div>

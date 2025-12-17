@@ -18,7 +18,8 @@ const theme: DefaultTheme = {
       heading: "42px"
     },
     fonts: {
-      main: "Courier New, monospace"
+      main: "Courier New, monospace",
+      old: "Times New Roman"
     },
     fontWeights: {
       normal: 400,
