@@ -4,8 +4,6 @@ import { useEffect, useRef, useState } from "react";
 import MenuIcon from "./icons/MenuIcon";
 import demoInfo from "../demoInfo";
 import ReactMarkdown from "react-markdown";
-import { P } from "./StyledElements";
-import theme from "../theme";
 
 const Base = styled.div`
   display: flex;
