@@ -204,7 +204,7 @@ const DemoList = () => {
             <MenuDiv>
               <MenuContainer $flex={"1"}>
                 <ProfileInfo>
-                  <ProfileImg src="https://avatars.githubusercontent.com/u/89577985?v=4" />
+                  <ProfileImg src="https://avatars.githubusercontent.com/u/89577985?v=4" draggable={false} />
                   <div style={{ flexDirection: "column", gap: "0px" }}>
                     <div style={{ padding: "5px", fontSize: "20px" }}>
                       <b>zopinos</b>
