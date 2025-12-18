@@ -45,7 +45,7 @@ const Home = () => {
       <TutorialImg draggable="false" src="src/assets/20250201_233506_2.png" />
       <Page>
         <H1 $whiteFont>demo-dump</H1>
-        <P $whiteFont>My visual sandbox.</P>
+        <P $whiteFont>My visual sandbox and archive.</P>
       </Page>
     </Base>
   );

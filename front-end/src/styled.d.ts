@@ -22,6 +22,7 @@ declare module "styled-components" {
       };
       fonts: {
         main: string;
+        old: string;
       };
       fontWeights: {
         normal: string | number;

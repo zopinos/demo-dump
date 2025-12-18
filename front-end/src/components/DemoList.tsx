@@ -4,8 +4,6 @@ import { useEffect, useRef, useState } from "react";
 import MenuIcon from "./icons/MenuIcon";
 import demoInfo from "../demoInfo";
 import ReactMarkdown from "react-markdown";
-import { P } from "./StyledElements";
-import theme from "../theme";
 
 const Base = styled.div`
   display: flex;
@@ -208,13 +206,13 @@ const DemoList = () => {
             <MenuDiv>
               <MenuContainer $flex={"1"}>
                 <ProfileInfo>
-                  <ProfileImg src="https://avatars.githubusercontent.com/u/89577985?v=4" />
+                  <ProfileImg src="https://avatars.githubusercontent.com/u/89577985?v=4" draggable={false} />
                   <div style={{ flexDirection: "column", gap: "0px" }}>
                     <div style={{ padding: "5px", fontSize: "20px" }}>
                       <b>zopinos</b>
                     </div>
                     <div style={{ padding: "5px" }}>
-                      <ProfileLink href="https://github.com/zopinos" target="_blank">
+                      <ProfileLink href="https://github.com/zopinos/demo-dump" target="_blank">
                         github
                       </ProfileLink>
                     </div>

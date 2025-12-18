@@ -24,7 +24,7 @@ const Content = styled.div`
   display: flex;
   align-items: center;
   flex-direction: column;
-  width: 50%;
+  width: 30%;
   margin-top: 80px;
   overflow-y: scroll;
   height: 1700px;
@@ -145,9 +145,9 @@ const WordVortex = () => {
       <GlobalStyle />
       <Page>
         <Content>
-          <H1>Word Vortex</H1>
-          <P>You can find the Word Vortex down below.</P>
-          <P>
+          <H1 $oldFont>Word Vortex</H1>
+          <P $oldFont>You can find the Word Vortex down below.</P>
+          <P $oldFont>
             <b>Beware:</b> Looking at the Word Vortex for a prolonged time will result in a{" "}
             <a href="https://en.wikipedia.org/wiki/Motion_aftereffect" target="_blank">
               motion aftereffect
