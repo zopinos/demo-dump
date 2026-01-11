@@ -1,4 +1,4 @@
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import { HashRouter as Router, Routes, Route } from "react-router-dom";
 import Home from "./components/demos/home/Home";
 import { ThemeProvider, createGlobalStyle } from "styled-components";
 import theme from "./theme";
@@ -25,7 +25,7 @@ const GlobalStyle = createGlobalStyle`
 
 const App = () => {
   return (
-    <Router basename="/demo-dump/">
+    <Router>
       <ThemeProvider theme={theme}>
         <GlobalStyle />
         <Routes>
