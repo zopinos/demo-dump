@@ -367,4 +367,4 @@ Drag N Throw was born as I wanted to start to learn about making more graphics b
     flex-direction: column;
     height: 100%;
   }
-`,SC=()=>re.jsx(_v,{children:re.jsxs(Yh,{theme:Zh,children:[re.jsx(wC,{}),re.jsxs(Nv,{children:[re.jsx(el,{path:"/",element:re.jsx(G0,{})}),re.jsx(el,{path:"/word-vortex",element:re.jsx(ux,{})}),re.jsx(el,{path:"/photo-dump",element:re.jsx(cC,{})}),re.jsx(el,{path:"/drag-n-throw",element:re.jsx(xC,{})})]}),re.jsx(Gk,{})]})});_y.createRoot(document.getElementById("root")).render(re.jsx(se.StrictMode,{children:re.jsx(SC,{})}));
+`,SC=()=>re.jsx(_v,{basename:"/demo-dump/",children:re.jsxs(Yh,{theme:Zh,children:[re.jsx(wC,{}),re.jsxs(Nv,{children:[re.jsx(el,{path:"/",element:re.jsx(G0,{})}),re.jsx(el,{path:"/word-vortex/",element:re.jsx(ux,{})}),re.jsx(el,{path:"/photo-dump/",element:re.jsx(cC,{})}),re.jsx(el,{path:"/drag-n-throw/",element:re.jsx(xC,{})})]}),re.jsx(Gk,{})]})});_y.createRoot(document.getElementById("root")).render(re.jsx(se.StrictMode,{children:re.jsx(SC,{})}));
