@@ -13,7 +13,7 @@ const GlobalStyle = createGlobalStyle`
     margin: 0;
     height: 100vh;
     color: ${({ theme }) => theme.palette.primary};
-    background-color: ${({ theme }) => theme.palette.secondary};
+    background-color: rgb(0, 0, 0, 0);
     scrollbar-gutter: stable both-edges;
   }
   #root {
