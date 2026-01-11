@@ -359,7 +359,7 @@ Drag N Throw was born as I wanted to start to learn about making more graphics b
     margin: 0;
     height: 100vh;
     color: ${({theme:t})=>t.palette.primary};
-    background-color: ${({theme:t})=>t.palette.secondary};
+    background-color: rgb(0, 0, 0, 0);
     scrollbar-gutter: stable both-edges;
   }
   #root {
