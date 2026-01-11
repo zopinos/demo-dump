@@ -6,13 +6,13 @@ import { imagePaths } from "./images";
 import RightArrowIcon from "../../icons/RightArrowIcon";
 import LeftArrowIcon from "../../icons/LeftArrowIcon";
 
-const posts = imagePaths.map((path) => path.replace("/public", "")).reverse();
+const posts = imagePaths.reverse();
 
 const GlobalStyle = createGlobalStyle<{ $disableScroll: boolean }>`
   html,
   body {
     overflow: ${({ $disableScroll }) => ($disableScroll ? "hidden" : "auto")};
-    background-color: ${({ theme }) => theme.palette.common.white};
+    background-color: ${({ theme }) => theme.palette.light};
   }
 `;
 

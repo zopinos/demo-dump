@@ -13,6 +13,7 @@ declare module "styled-components" {
       secondary: string;
       dark: string;
       menu: string;
+      light: string;
     };
 
     typography: {

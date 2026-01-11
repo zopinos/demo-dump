@@ -10,7 +10,8 @@ const theme: DefaultTheme = {
     primary: "rgba(22, 22, 26, 1)",
     secondary: "white",
     dark: "rgb(12, 12, 12)",
-    menu: "rgba(0,0,0,0.8)"
+    menu: "rgba(0, 0, 0, 0.85)",
+    light: "#fdfdfd"
   },
   typography: {
     fontSizes: {

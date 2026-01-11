@@ -74,7 +74,7 @@ const MenuWindow = styled.div<{ $height: string }>`
 const MenuContainer = styled.div<{ $flex: string }>`
   flex: ${({ $flex }) => $flex || "1"};
   display: flex;
-  margin: 20px;
+  margin: 14px;
   border-style: solid;
   border-color: ${({ theme }) => theme.palette.secondary};
   border-width: 1px;

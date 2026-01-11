@@ -5,8 +5,8 @@ const initPhysics = (canvas: HTMLCanvasElement): (() => void) => {
 
   const engine = Engine.create();
   const world = engine.world;
-
   const context = canvas.getContext("2d")!;
+  engine.gravity.y = 0.0;
 
   // Add walls to borders of the canvas
   const createWalls = () => {
@@ -55,7 +55,6 @@ const initPhysics = (canvas: HTMLCanvasElement): (() => void) => {
 
   // Add bodies to the world
   const bodies: Matter.Body[] = [];
-
   var boxA = Bodies.rectangle(canvas.width / 2, canvas.height / 2, 80, 80, { restitution: 0.8 });
   var boxB = Bodies.rectangle(canvas.width / 2 - 200, canvas.height / 2 - 250, 80, 80, { restitution: 0.8 });
   var triangle = Bodies.polygon(canvas.width / 2 + 120, canvas.height / 2 + 250, 3, 60, { restitution: 0.8 });
@@ -63,6 +62,7 @@ const initPhysics = (canvas: HTMLCanvasElement): (() => void) => {
 
   World.add(world, bodies);
 
+  // Make the bodies float around
   for (const body of world.bodies) {
     if (body.isStatic) continue;
 
@@ -75,8 +75,6 @@ const initPhysics = (canvas: HTMLCanvasElement): (() => void) => {
 
     Matter.Body.setAngularVelocity(body, (Math.random() - 0.5) * 0.007);
   }
-
-  engine.gravity.y = 0.0;
 
   const mouse = Mouse.create(canvas);
   const mouseConstraint = MouseConstraint.create(engine, {
