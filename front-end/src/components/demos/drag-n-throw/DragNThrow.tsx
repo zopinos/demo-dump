@@ -12,7 +12,6 @@ const DragNThrow = () => {
   return (
     <div>
       <GlobalStyle />
-      <div>hello</div>
       <PhysicsDemo />
     </div>
   );
