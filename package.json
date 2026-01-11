@@ -1,5 +1,6 @@
 {
   "name": "demo-dump",
+  "homepage": "https://zopinos.github.io/demo-dump",
   "private": true,
   "version": "0.0.0",
   "type": "module",

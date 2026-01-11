@@ -25,14 +25,14 @@ const GlobalStyle = createGlobalStyle`
 
 const App = () => {
   return (
-    <Router>
+    <Router basename="/demo-dump/">
       <ThemeProvider theme={theme}>
         <GlobalStyle />
         <Routes>
           <Route path="/" element={<Home />} />
-          <Route path="/word-vortex" element={<WordVortex />} />
-          <Route path="/photo-dump" element={<PhotoDump />} />
-          <Route path="/drag-n-throw" element={<DragNThrow />} />
+          <Route path="/word-vortex/" element={<WordVortex />} />
+          <Route path="/photo-dump/" element={<PhotoDump />} />
+          <Route path="/drag-n-throw/" element={<DragNThrow />} />
         </Routes>
         <DemoList />
       </ThemeProvider>
