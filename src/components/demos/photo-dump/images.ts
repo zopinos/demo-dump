@@ -6,4 +6,7 @@ export const imagePaths = Object.keys(imageModules);
 
 const imageCount = 59;
 
-export const imagePaths = Array.from({ length: imageCount }, (_, i) => `/photodump/${String(i).padStart(4, "0")}.jpg`);
+export const imagePaths = Array.from(
+  { length: imageCount },
+  (_, i) => `/demo-dump/photodump/${String(i).padStart(4, "0")}.jpg`
+);

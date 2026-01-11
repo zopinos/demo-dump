@@ -42,7 +42,7 @@ const Home = () => {
   return (
     <Base>
       <ButtonHint />
-      <TutorialImg draggable="false" src="src/assets/20250201_233506_2.png" />
+      <TutorialImg draggable="false" src="/demo-dump/20250201_233506_2.png" />
       <Page>
         <H1 $whiteFont>demo-dump</H1>
         <P $whiteFont>My visual sandbox and archive.</P>
