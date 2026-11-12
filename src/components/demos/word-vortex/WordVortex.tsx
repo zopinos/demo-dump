@@ -26,7 +26,7 @@ const Content = styled.div`
   flex-direction: column;
   width: 30%;
   margin-top: 80px;
-  overflow-y: scroll;
+  overflow-y: hidden;
   height: 1700px;
 `;
 

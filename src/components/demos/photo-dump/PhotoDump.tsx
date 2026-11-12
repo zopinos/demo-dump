@@ -1,5 +1,5 @@
 import styled, { createGlobalStyle } from "styled-components";
-import { CircleButton, H1 } from "../../StyledElements";
+import { CircleButton, H1, P } from "../../StyledElements";
 import { useEffect, useRef, useState } from "react";
 import CloseIcon from "../../icons/CloseIcon";
 import { imagePaths } from "./images";
@@ -7,6 +7,8 @@ import RightArrowIcon from "../../icons/RightArrowIcon";
 import LeftArrowIcon from "../../icons/LeftArrowIcon";
 
 const posts = imagePaths.reverse();
+const postsPerPage = 15;
+const pageCount = Math.ceil(posts.length / postsPerPage);
 
 const GlobalStyle = createGlobalStyle<{ $disableScroll: boolean }>`
   html,
@@ -41,6 +43,13 @@ const Container = styled.div`
   padding: 20px;
   max-width: 700px;
   margin: 3em 0;
+`;
+
+const Pagination = styled.div`
+  display: flex;
+  flex-direction: row;
+  margin-bottom: 50px;
+  gap: 10px;
 `;
 
 const Post = styled.div`
@@ -129,6 +138,7 @@ const PhotoDump = () => {
 
   const [imageOpen, setImageOpen] = useState<string | null>(null);
   const [imageIndex, setImageIndexState] = useState<number | null>(null);
+  const [imagePage, setImagePage] = useState<number>(0);
 
   const setImageIndex = (index: number | null) => {
     if (index && index < 0) setImageIndexState(0);
@@ -183,7 +193,7 @@ const PhotoDump = () => {
         <GlobalStyle $disableScroll={!!imageOpen} />
         <H1>PHOTO DUMP</H1>
         <Container>
-          {posts.map((post, index) => (
+          {posts.slice(postsPerPage * imagePage, postsPerPage * (imagePage + 1)).map((post, index) => (
             <Post
               key={post}
               onClick={() => {
@@ -191,7 +201,7 @@ const PhotoDump = () => {
                 setImageIndex(index);
               }}
             >
-              <Image src={post} alt="sorry, this will come later" draggable="false" />
+              <Image src={post} alt="loading..." draggable="false" />
               <Highlighting className="overlay" />
             </Post>
           ))}
@@ -220,6 +230,13 @@ const PhotoDump = () => {
             </RightArrowButton>
           </Overlay>
         )}
+        <Pagination>
+          {[...Array(pageCount).keys()].map((index) => (
+            <CircleButton key={index} onClick={() => setImagePage(index)}>
+              <P $whiteFont>{index + 1}</P>
+            </CircleButton>
+          ))}
+        </Pagination>
       </Page>
     </Base>
   );
