@@ -42,13 +42,17 @@ const Container = styled.div`
   gap: 10px;
   padding: 20px;
   max-width: 700px;
+  width: 90%;
   margin: 3em 0;
 `;
 
 const Pagination = styled.div`
   display: flex;
   flex-direction: row;
+  justify-content: center;
   gap: 10px;
+  width: 100%;
+  overflow-x: auto;
 `;
 
 const PageBottom = styled.div`

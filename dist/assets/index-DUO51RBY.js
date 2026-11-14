@@ -288,11 +288,15 @@ Drag N Throw was born as I wanted to start to learn about making more graphics b
   gap: 10px;
   padding: 20px;
   max-width: 700px;
+  width: 90%;
   margin: 3em 0;
 `,zp=R.div`
   display: flex;
   flex-direction: row;
+  justify-content: center;
   gap: 10px;
+  width: 100%;
+  overflow-x: auto;
 `,Bp=R.div`
   margin: 50px 0;
 `,Vp=R.div`
