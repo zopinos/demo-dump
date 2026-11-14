@@ -2,13 +2,13 @@ import styled, { createGlobalStyle } from "styled-components";
 import { CircleButton, H1, P } from "../../StyledElements";
 import { useEffect, useRef, useState } from "react";
 import CloseIcon from "../../icons/CloseIcon";
-import { imagePaths } from "./images";
+import { photoPaths } from "./photoPaths";
 import RightArrowIcon from "../../icons/RightArrowIcon";
 import LeftArrowIcon from "../../icons/LeftArrowIcon";
+import { thumbnailPaths } from "./thumbnailPaths";
 
-const posts = imagePaths.reverse();
-const postsPerPage = 15;
-const pageCount = Math.ceil(posts.length / postsPerPage);
+const photosPerPage = 15;
+const pageCount = Math.ceil(photoPaths.length / photosPerPage);
 
 const GlobalStyle = createGlobalStyle<{ $disableScroll: boolean }>`
   html,
@@ -48,16 +48,18 @@ const Container = styled.div`
 const Pagination = styled.div`
   display: flex;
   flex-direction: row;
-  margin-bottom: 50px;
   gap: 10px;
 `;
 
-const Post = styled.div`
+const PageBottom = styled.div`
+  margin: 50px 0;
+`;
+
+const ThumbnailContainer = styled.div`
   position: relative;
   cursor: pointer;
   border-radius: 5px;
   overflow: hidden;
-  width: 100%;
   aspect-ratio: 1 / 1;
 
   &:hover .overlay {
@@ -65,7 +67,7 @@ const Post = styled.div`
   }
 `;
 
-const Image = styled.img`
+const Thumbnail = styled.img`
   width: 100%;
   height: 100%;
   object-fit: cover;
@@ -83,14 +85,11 @@ const Highlighting = styled.div`
   width: 100%;
   height: 100%;
   background: rgba(0, 0, 0, 0.3);
-  display: flex;
-  align-items: center;
-  justify-content: center;
   opacity: 0;
   transition: opacity 0.2s;
 `;
 
-const BigImage = styled.img`
+const FullPhoto = styled.img`
   max-width: 70vw;
   max-height: 85vh;
   object-fit: contain;
@@ -132,45 +131,45 @@ const LeftArrowButton = styled(RightArrowButton)`
 `;
 
 const PhotoDump = () => {
-  const bigImageRef = useRef<HTMLImageElement | null>(null);
+  const fullPhotoRef = useRef<HTMLImageElement | null>(null);
   const leftArrowRef = useRef<HTMLButtonElement | null>(null);
   const rightArrowRef = useRef<HTMLButtonElement | null>(null);
 
-  const [imageOpen, setImageOpen] = useState<string | null>(null);
-  const [imageIndex, setImageIndexState] = useState<number | null>(null);
-  const [imagePage, setImagePage] = useState<number>(0);
+  const [photoOpen, setPhotoOpen] = useState<string | null>(null);
+  const [photoIndex, setPhotoIndexState] = useState<number | null>(null);
+  const [photosPage, setPhotosPage] = useState<number>(0);
 
-  const setImageIndex = (index: number | null) => {
-    if (index && index < 0) setImageIndexState(0);
-    else if (index && index > posts.length - 1) setImageIndexState(posts.length - 1);
-    else setImageIndexState(index);
+  const setPhotoIndex = (index: number | null) => {
+    if (index && index < 0) setPhotoIndexState(0);
+    else if (index && index > photoPaths.length - 1) setPhotoIndexState(photoPaths.length - 1);
+    else setPhotoIndexState(index);
   };
 
   const handleOnClick = (event: MouseEvent) => {
     if (
-      bigImageRef.current &&
-      !event.composedPath().includes(bigImageRef.current) &&
+      fullPhotoRef.current &&
+      !event.composedPath().includes(fullPhotoRef.current) &&
       leftArrowRef.current &&
       !event.composedPath().includes(leftArrowRef.current) &&
       rightArrowRef.current &&
       !event.composedPath().includes(rightArrowRef.current)
     ) {
-      setImageOpen(null);
+      setPhotoOpen(null);
     }
   };
 
   const handleOnKeyDown = (event: KeyboardEvent) => {
     if (event.code === "Escape") {
-      setImageOpen(null);
+      setPhotoOpen(null);
     } else if (event.code === "ArrowLeft") {
-      setImageIndex(imageIndex !== null ? imageIndex - 1 : null);
+      setPhotoIndex(photoIndex !== null ? photoIndex - 1 : null);
     } else if (event.code === "ArrowRight") {
-      setImageIndex(imageIndex !== null ? imageIndex + 1 : null);
+      setPhotoIndex(photoIndex !== null ? photoIndex + 1 : null);
     }
   };
 
   useEffect(() => {
-    if (imageOpen) {
+    if (photoOpen) {
       setTimeout(() => {
         document.body.addEventListener("click", handleOnClick);
         document.body.addEventListener("keydown", handleOnKeyDown);
@@ -181,41 +180,44 @@ const PhotoDump = () => {
         document.body.removeEventListener("keydown", handleOnKeyDown);
       };
     }
-  }, [imageOpen]);
+  }, [photoOpen]);
 
   useEffect(() => {
-    setImageOpen(imageIndex !== null ? posts[imageIndex] : null);
-  }, [imageIndex]);
+    setPhotoOpen(photoIndex !== null ? photoPaths[photoIndex] : null);
+  }, [photoIndex]);
 
   return (
     <Base>
       <Page>
-        <GlobalStyle $disableScroll={!!imageOpen} />
+        <GlobalStyle $disableScroll={!!photoOpen} />
         <H1>PHOTO DUMP</H1>
         <Container>
-          {posts.slice(postsPerPage * imagePage, postsPerPage * (imagePage + 1)).map((post, index) => (
-            <Post
-              key={post}
-              onClick={() => {
-                setImageOpen(post);
-                setImageIndex(index);
-              }}
-            >
-              <Image src={post} alt="loading..." draggable="false" />
-              <Highlighting className="overlay" />
-            </Post>
-          ))}
+          {photoPaths.slice(photosPerPage * photosPage, photosPerPage * (photosPage + 1)).map((photoPath, index) => {
+            const photoPathIndex = photosPerPage * photosPage + index;
+            return (
+              <ThumbnailContainer
+                key={photoPath}
+                onClick={() => {
+                  setPhotoOpen(photoPath);
+                  setPhotoIndex(photoPathIndex);
+                }}
+              >
+                <Thumbnail src={thumbnailPaths[photoPathIndex]} alt="loading..." draggable="false" />
+                <Highlighting className="overlay" />
+              </ThumbnailContainer>
+            );
+          })}
         </Container>
-        {imageOpen && (
+        {photoOpen && (
           <Overlay>
-            <BigImage src={imageOpen} draggable="false" ref={bigImageRef} />
+            <FullPhoto src={photoOpen} draggable="false" ref={fullPhotoRef} />
             <CloseButton>
               <CloseIcon />
             </CloseButton>
             <LeftArrowButton
               ref={leftArrowRef}
               onClick={() => {
-                setImageIndex(imageIndex !== null ? imageIndex - 1 : null);
+                setPhotoIndex(photoIndex !== null ? photoIndex - 1 : null);
               }}
             >
               <LeftArrowIcon />
@@ -223,7 +225,7 @@ const PhotoDump = () => {
             <RightArrowButton
               ref={rightArrowRef}
               onClick={() => {
-                setImageIndex(imageIndex !== null ? imageIndex + 1 : null);
+                setPhotoIndex(photoIndex !== null ? photoIndex + 1 : null);
               }}
             >
               <RightArrowIcon />
@@ -232,11 +234,12 @@ const PhotoDump = () => {
         )}
         <Pagination>
           {[...Array(pageCount).keys()].map((index) => (
-            <CircleButton key={index} onClick={() => setImagePage(index)}>
-              <P $whiteFont>{index + 1}</P>
+            <CircleButton key={index} onClick={() => setPhotosPage(index)} $selected={index === photosPage}>
+              <P $whiteFont={index !== photosPage}>{index + 1}</P>
             </CircleButton>
           ))}
         </Pagination>
+        <PageBottom></PageBottom>
       </Page>
     </Base>
   );
